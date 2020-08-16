@@ -8,7 +8,7 @@ conda install -c conda-forge ambertools=20
 git clone https://github.com/varunp7/amberfiles.git
 cd amberfiles
 
-antechamber -i /home/rsa-key-20200424/amberfiles/ZINC1.pdb -fi pdb -o ZINC1.am1bcc.mol2 -fo mol2 -at gaff2 -c bcc -rn LIG -nc -1
+antechamber -i /home/rsa-key-20200424/amberfiles/ZINC1.pdb -fi pdb -o ZINC1.am1bcc.mol2 -fo mol2 -at gaff2 -c bcc -rn LIG -nc 0
 parmchk2 -i ZINC1.am1bcc.mol2 -f mol2 -o ZINC1.am1bcc.frcmod
 
 tleap
