@@ -1,3 +1,14 @@
+conda create --name AmberTools20
+conda activate AmberTools20
+conda install -c conda-forge ambertools=20
+
+cd amberfiles
+
+antechamber -i /home/rsa-key-20200424/amberfiles/ZINC1.pdb -fi pdb -o ZINC1.am1bcc.mol2 -fo mol2 -at gaff2 -c bcc -rn LIG -nc -1
+parmchk2 -i ZINC1.am1bcc.mol2 -f mol2 -o ZINC1.am1bcc.frcmod
+
+tleap
+##All of these commands are after you do tleap
 source leaprc.protein.ff14SB
 source leaprc.gaff
 source leaprc.water.tip3p
@@ -12,3 +23,14 @@ addions solvcomplex Cl- 0
 addions solvcomplex Na+ 0
 savepdb solvcomplex ZINC1.wet.complex.pdb
 saveamberparm solvcomplex ZINC1.wet.complex.parm7 ZINC1.wet.complex.rst7
+quit
+##Now back in normal terminal
+
+$AMBERHOME/bin/sander -O -i 01_Min.in -o 01_Min.out -p ZINC1.wet.complex.parm7 -c ZINC1.wet.complex.rst7 -r 01_Min.ncrst -inf 01_Min.mdinfo &
+tail -f 01_Min.out
+
+$AMBERHOME/bin/sander -O -i 02_Heat.in -o 02_Heat.out -p ZINC1.wet.complex.parm7 -c 01_Min.ncrst -r 02_Heat.ncrst -x 02_Heat.nc -inf 02_Heat.mdinfo &
+tail -f 02_Heat.out
+
+$AMBERHOME/bin/sander -O -i 03_Prod.in -o 03_Prod.out -p ZINC1.wet.complex.parm7 -c 02_Heat.ncrst -r 03_Prod.ncrst -x 03_Prod.nc -inf 03_Prod.info &
+tail -f 03_Prod.out
