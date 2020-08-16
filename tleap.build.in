@@ -1,0 +1,14 @@
+source leaprc.protein.ff14SB
+source leaprc.gaff
+source leaprc.water.tip3p
+loadamberparams frcmod.ionsjc_tip3p
+set default PBradii mbondi3
+rec=loadpdb /home/rsa-key-20200424/amberfiles/SARSh.pdb
+loadamberparams /home/rsa-key-20200424/amberfiles/ZINC1h.am1bcc.frcmod
+lig=loadmol2 /home/rsa-key-20200424/amberfiles/ZINC1h.am1bcc.mol2
+solvcomplex= combine {rec lig}
+solvateoct solvcomplex TIP3PBOX 12.0
+addions solvcomplex Cl- 0
+addions solvcomplex Na+ 0
+savepdb solvcomplex ZINC1.wet.complex.pdb
+saveamberparm solvcomplex ZINC1.wet.complex.parm7 ZINC1.wet.complex.rst7
