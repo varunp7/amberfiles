@@ -3,7 +3,7 @@ source leaprc.gaff
 source leaprc.water.tip3p
 loadamberparams frcmod.ionsjc_tip3p
 set default PBradii mbondi3
-rec=loadpdb /home/rsa-key-20200424/amberfiles/SARSh.pdb
+rec=loadpdb /home/rsa-key-20200424/amberfiles/SARS.pdb
 loadamberparams /home/rsa-key-20200424/amberfiles/ZINC1h.am1bcc.frcmod
 lig=loadmol2 /home/rsa-key-20200424/amberfiles/ZINC1h.am1bcc.mol2
 solvcomplex= combine {rec lig}
