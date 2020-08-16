@@ -8,7 +8,7 @@ conda install -c conda-forge ambertools=20
 git clone https://github.com/varunp7/amberfiles.git
 cd amberfiles
 
-antechamber -i /home/rsa-key-20200424/amberfiles/ZINC1.pdb -fi pdb -o ZINC1.am1bcc.mol2 -fo mol2 -at gaff2 -c bcc -rn LIG -nc 0
+antechamber -i /home/rsa-key-20200424/amberfiles/ZINC1h.pdb -fi pdb -o ZINC1.am1bcc.mol2 -fo mol2 -at gaff2 -c bcc -rn LIG -nc 0
 parmchk2 -i ZINC1.am1bcc.mol2 -f mol2 -o ZINC1.am1bcc.frcmod
 
 tleap
@@ -19,8 +19,8 @@ source leaprc.water.tip3p
 loadamberparams frcmod.ionsjc_tip3p
 set default PBradii mbondi3
 rec=loadpdb /home/rsa-key-20200424/amberfiles/SARS.pdb
-loadamberparams /home/rsa-key-20200424/amberfiles/ZINC1h.am1bcc.frcmod
-lig=loadmol2 /home/rsa-key-20200424/amberfiles/ZINC1h.am1bcc.mol2
+loadamberparams /home/rsa-key-20200424/amberfiles/ZINC1.am1bcc.frcmod
+lig=loadmol2 /home/rsa-key-20200424/amberfiles/ZINC1.am1bcc.mol2
 solvcomplex= combine {rec lig}
 solvateoct solvcomplex TIP3PBOX 12.0
 addions solvcomplex Cl- 0
